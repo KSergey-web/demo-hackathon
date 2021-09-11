@@ -20,6 +20,6 @@ export class AppController {
 
   @Get('env')
   getEnvBd() {
-    return process.env.BD;
+    return {env: process.env.BD, hh:'hh'};
   }
 }
