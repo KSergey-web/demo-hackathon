@@ -5,8 +5,16 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
+  @Get('call-axious')
+  async getAxios() {
+    let data;
+    data = await this.appService.getHello();
+    console.log(data);
+    return data;
+  }
+
+  @Get('')
+  getHello() {
     return this.appService.getHello();
   }
 }
