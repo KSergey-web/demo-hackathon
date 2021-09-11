@@ -17,4 +17,9 @@ export class AppController {
   getHello() {
     return this.appService.getHello();
   }
+
+  @Get('env')
+  getEnvBd() {
+    return process.env.BD;
+  }
 }
