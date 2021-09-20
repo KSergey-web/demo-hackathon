@@ -24,25 +24,16 @@ export class UserService {
       return this.sanitizeUser(createdUser);
     }
 
+    async findByFunction() {
+      let cur = await this.userModel.find({},{login: 1}).$where(function(){ 
+        return this.login == 'ldfs'
+      }).exec();
+      return;
+    }
+
   sanitizeUser(user: UserDocument) {
     const sanitized = user.toObject();
     delete sanitized['password'];
     return sanitized;
-  }
-
-  findAll() {
-    return `This action returns all user`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 }
