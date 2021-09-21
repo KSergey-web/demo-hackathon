@@ -46,4 +46,7 @@ export const getXML = (xmldata: string) => {
     
   var jsonObj = parser.parse(xmlData ,options );
   return jsonObj;
+
   }
+
+  () => {}
