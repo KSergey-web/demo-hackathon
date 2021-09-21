@@ -1,6 +1,7 @@
 import { Controller, Get, Header, Param, ParseIntPipe } from '@nestjs/common';
 import { IsNumber } from 'class-validator';
 import { AppService } from './app.service';
+import { getXML } from './shared/getxml';
 import { TestDTO } from './user/dto/create-user.dto';
 
 @Controller()
@@ -22,7 +23,7 @@ export class AppController {
 
   @Get('xml')
   getXML() {
-    return this.appService.getXML();
+    return getXML('');
   }
 
   @Get('env')
