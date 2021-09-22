@@ -1,8 +1,8 @@
-import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { lastValueFrom, map, Observable, take } from 'rxjs';
 import {AES} from 'crypto-js'
+import { HttpService } from '@nestjs/axios';
 
 
 
@@ -33,7 +33,7 @@ export class AppService {
         })
         .pipe(
           take(1),
-          map((res) => res.data),
+          map((res: any) => res.data),
         ),
     );
   }
