@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { IsDate, IsInt, IsNumber, IsNumberString, IsString, MaxLength, MinLength } from "class-validator";
+import { IsDate, IsInt, isNumber, IsNumber, IsNumberString, IsString, MaxLength, MinLength } from "class-validator";
 
 export class CreateUserDto {
     @IsString()
@@ -15,12 +15,12 @@ export class TestDTO {
     @Transform(({value}) => {
         return Number(value)
     })
-    @IsInt()
-    id: number;
+    @IsNumber()
+    latitude: number;
 
     @Transform(({value}) => {
-        return new Date(value)
+        return Number(value)
     })
-    @IsDate()
-    date: Date
+    @IsNumber()
+    longitude: number
 }

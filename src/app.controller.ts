@@ -1,4 +1,4 @@
-import { Controller, Get, Header, Param, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Get, Header, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { IsNumber } from 'class-validator';
 import { AppService } from './app.service';
 import { getXML } from './shared/getxml';
@@ -29,5 +29,10 @@ export class AppController {
   @Get('env')
   getEnvBd() {
     return {env: process.env.BD, hh:'hh'};
+  }
+
+  @Post('upload')
+  async setData(@Body() test: TestDTO) {
+    return test;
   }
 }
