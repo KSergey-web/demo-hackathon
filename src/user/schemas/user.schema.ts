@@ -15,6 +15,13 @@ export class User {
   @Prop({ required: true })
   login: string;
 
+  @Prop({ required: true })
+  name: string;
+
+  @Prop({ required: true })
+  surname: string;
+
+
   @Prop({ select: false })
   __v: Number;
 

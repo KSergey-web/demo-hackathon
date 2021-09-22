@@ -1,8 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import {  LoginDTO } from './dto/create-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
 
 @Injectable()
@@ -11,7 +10,7 @@ export class UserService {
     @InjectModel(User.name) private userModel: Model<UserDocument>
     ){}
     
-    async create(userDTO: CreateUserDto) {
+    async create(userDTO: LoginDTO) {
       const { login } = userDTO;
       const user = await this.userModel.findOne({ login });
       if (user) {
@@ -24,6 +23,28 @@ export class UserService {
       return this.sanitizeUser(createdUser);
     }
 
+    async findByLogin(userDTO: LoginDTO) {
+      const { login, password } = userDTO;
+      const user = await this.userModel.findOne({ login });
+      if (!user) {
+        throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+      }
+  
+      if (password == user.password) {
+        return this.sanitizeUser(user);
+      } else {
+        throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+      }
+    }
+
+    async checkUserById(id: string): Promise<UserDocument> {
+      const user = await this.userModel.findById(id);
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+      }
+      return user;
+    }
+
     async findByFunction() {
       let cur = await this.userModel.find({},{login: 1}).$where(function(){ 
         return this.login == 'ldfs'
@@ -31,9 +52,15 @@ export class UserService {
       return;
     }
 
-  sanitizeUser(user: UserDocument) {
+  sanitizeUser(user: UserDocument):any {
     const sanitized = user.toObject();
     delete sanitized['password'];
     return sanitized;
+  }
+
+  async findByPayload(payload: any) {
+    //используется для получения пользователя в JWTStrategy
+    const { login } = payload;
+    return this.sanitizeUser(await this.userModel.findOne({ login }));
   }
 }

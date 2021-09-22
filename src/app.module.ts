@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 import { CompanyModule } from './company/company.module';
 import { TransportModule } from './transport/transport.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,9 +16,9 @@ import { TransportModule } from './transport/transport.module';
     SharedModule,
     HttpModule, 
     MongooseModule.forRoot(process.env.MONGODB_WRITE_CONNECTION_STRING),
-    UserModule,
     CompanyModule,
-    TransportModule
+    TransportModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
