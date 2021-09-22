@@ -40,7 +40,7 @@ export class AuthController {
   async register(
     @Body() userDTO: RegisterDTO,
   ) {
-    const user = await this.userService.create(userDTO);
+    const user:any = await this.userService.create(userDTO);
     const payload = {
       login: user.login,
     };
