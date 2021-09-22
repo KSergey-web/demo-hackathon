@@ -9,12 +9,12 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
   
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
-  @Get()
-  currentUser(@User() { _id }: UserDocument) {
-    return this.userService.checkUserById(_id);
-  }
+  // @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard)
+  // @Get()
+  // currentUser(@User() { _id }: UserDocument) {
+  //   return this.userService.checkUserById(_id);
+  // }
 
   fn(){}
 }

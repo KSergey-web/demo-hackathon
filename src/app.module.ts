@@ -18,7 +18,8 @@ import { AuthModule } from './auth/auth.module';
     MongooseModule.forRoot(process.env.MONGODB_WRITE_CONNECTION_STRING),
     CompanyModule,
     TransportModule,
-    AuthModule
+    //AuthModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
