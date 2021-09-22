@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
     // CompanyModule,
     // TransportModule,
     // AuthModule,
-    // UserModule
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
