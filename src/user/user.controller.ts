@@ -15,4 +15,6 @@ export class UserController {
   currentUser(@User() { _id }: UserDocument) {
     return this.userService.checkUserById(_id);
   }
+
+  fn(){}
 }
