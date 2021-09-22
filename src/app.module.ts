@@ -1,4 +1,3 @@
-import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
@@ -9,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { CompanyModule } from './company/company.module';
 import { TransportModule } from './transport/transport.module';
 import { AuthModule } from './auth/auth.module';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -16,9 +16,9 @@ import { AuthModule } from './auth/auth.module';
     SharedModule,
     HttpModule, 
     MongooseModule.forRoot(process.env.MONGODB_WRITE_CONNECTION_STRING),
-    // CompanyModule,
-    // TransportModule,
-    // AuthModule,
+    CompanyModule,
+    TransportModule,
+    AuthModule,
     UserModule
   ],
   controllers: [AppController],

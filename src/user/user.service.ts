@@ -20,10 +20,10 @@ export class UserService {
       console.log(createdUser)
       console.log(userDTO)
       await createdUser.save();
-     // return this.sanitizeUser(createdUser);
+      return this.sanitizeUser(createdUser);
     }
 
-    async findByLogin(userDTO: LoginDTO): Promise<any> {
+    async findByLogin(userDTO: LoginDTO) {
       const { login, password } = userDTO;
       const user = await this.userModel.findOne({ login });
       if (!user) {
@@ -31,8 +31,7 @@ export class UserService {
       }
   
       if (password == user.password) {
-        //return this.sanitizeUser(user);
-        return user
+        return this.sanitizeUser(user);
       } else {
         throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
       }
@@ -41,7 +40,7 @@ export class UserService {
     async findByPayload(payload: any) {
       //используется для получения пользователя в JWTStrategy
       const { login } = payload;
-      //return this.sanitizeUser(await this.userModel.findOne({ login }));
+      return this.sanitizeUser(await this.userModel.findOne({ login }));
     }
 
     async checkUserById(id: string): Promise<UserDocument> {
@@ -59,11 +58,11 @@ export class UserService {
       return;
     }
 
-  // sanitizeUser(user: UserDocument):any {
-  //   const sanitized = user.toObject();
-  //   delete sanitized['password'];
-  //   return sanitized;
-  // }
+  sanitizeUser(user: UserDocument):any {
+    const sanitized = user.toObject();
+    delete sanitized['password'];
+    return sanitized;
+  }
 
   
 }
